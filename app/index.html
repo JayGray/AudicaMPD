@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+        <script src="scripts/vendor/modernizr.min.js"></script>
+    </head>
+    <body class="default-color">
+
+    <div id="wrapper">
+      <div id="searchView" class="section">
+        <input type="text" id="searchField" class="mousetrap" autocomplete="off"/>
+        <div id="searchResults"></div>
+      </div>
+
+      <div id="playerView" class="section" data-open="true">
+        <div id="trackList"></div>
+        <div id="currentPlaying">
+          <div id="track"></div>
+          <div id="artist"></div>
+          <div id="album"></div>
+        </div>
+      </div>
+
+      <div id="controls">
+        <div id="timelineWrapper"><div id="timeline"></div></div>
+          <div class="icons"><div class="prev"></div></div>
+          <div class="icons"><div class="play"></div></div>
+          <div class="icons"><div class="next"></div></div>
+      </div>
+    </div>
+
+    <!-- build:js scripts/plugins.js -->
+    <script src="scripts/vendor/taffy-2.6.1.js"></script>
+    <script src="scripts/vendor/jquery.min.js"></script>
+    <script src="scripts/vendor/mousetrap.min.js"></script>
+    <script src="scripts/vendor/mopidy.js"></script>
+
+    <script src="scripts/vendor/bootstrap.min.js"></script>
+
+    <script src="scripts/keybindings.js"></script>
+    <script src="scripts/core.js"></script>
+    <script src="scripts/controls.js"></script>
+    <script src="scripts/playerView.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

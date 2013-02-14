@@ -1,0 +1,9 @@
+{
+  "author": "Jörg Weber",
+  "name": "AudicaMPD",
+  "version": "0.0.1",
+  "devDependencies": {},
+  "dependencies": {
+    "grunt-contrib": "~0.3.0"
+  }
+}

@@ -1,0 +1,143 @@
+.default-color {
+  color: #f2f2f2;
+}
+.default-color #searchView {
+  color: #316072;
+}
+.default-color #searchView #search {
+  background-color: #f2f2f2;
+}
+.default-color #controls {
+  background-color: #d9d9d9;
+}
+.default-color #controls #timelineWrapper:after {
+  background-color: #8a9ba6;
+}
+.default-color #controls #timeline {
+  background-color: #d97979;
+}
+.default-color #controls .icons div:after,
+.default-color #controls .icons div:before {
+  background-color: #316072;
+}
+.default-color #controls .icons div.play:after,
+.default-color #controls .icons div.next:after {
+  border-left-color: #316072;
+}
+.default-color #controls .icons div.prev:after {
+  border-right-color: #316072;
+}
+body {
+  overflow: hidden;
+}
+#wrapper {
+  overflow: hidden;
+}
+#wrapper #controls {
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  position: fixed;
+  bottom: -46px;
+}
+#wrapper #controls #timelineWrapper {
+  width: 100%;
+  border-bottom: 1px solid #FFF;
+}
+#wrapper #controls #timelineWrapper:after {
+  content: '';
+  width: 100%;
+  display: block;
+  position: relative;
+  height: 1px;
+}
+#wrapper #controls #timelineWrapper #timeline {
+  display: block;
+  width: 0;
+  position: relative;
+  height: 4px;
+  -webkit-transition: width 1s;
+}
+#wrapper #controls .icons {
+  float: left;
+  height: 30px;
+  padding: 5px;
+  width: 30px;
+  margin: 2px 5px;
+  text-align: center;
+  border-radius: 21px;
+}
+#wrapper #controls .icons div {
+  padding-left: 5px;
+}
+#wrapper #controls .icons div:after,
+#wrapper #controls .icons div:before {
+  content: "";
+  position: relative;
+  left: 0;
+  margin: 0;
+  display: block;
+}
+#wrapper #controls .icons .play:after {
+  left: 2px;
+  border-style: solid;
+  border-width: 15px 20px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  background: transparent;
+}
+#wrapper #controls .icons .next:before {
+  width: 4px;
+  height: 30px;
+  left: 16px;
+}
+#wrapper #controls .icons .next:after {
+  border-style: solid;
+  border-width: 15px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  margin-top: -30px;
+  background: transparent;
+}
+#wrapper #controls .icons .prev:before {
+  width: 4px;
+  height: 30px;
+}
+#wrapper #controls .icons .prev:after {
+  left: -10px;
+  border-style: solid;
+  border-width: 15px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  margin-top: -30px;
+  background: transparent;
+}
+#searchView #searchResults {
+  overflow: auto;
+}
+#searchView #searchResults .active {
+  background: #d97979;
+  color: #f2f2f2;
+}
+#playerView {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 100;
+  width: 100%;
+  -webkit-transition: left 1s;
+  box-shadow: 0 0 10px 5px #999;
+}
+#playerView #trackList {
+  width: 45%;
+  float: left;
+  overflow: auto;
+}
+#playerView #currentPlaying {
+  width: 45%;
+  float: right;
+}
