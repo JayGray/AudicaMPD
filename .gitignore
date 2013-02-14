@@ -3,5 +3,5 @@ dist
 *~
 .DS_Store
 .idea/
-.node_modules/
+node_modules/
 atlassian-ide-plugin.xml
