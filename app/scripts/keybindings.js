@@ -40,6 +40,14 @@
         AudicaMPD.trigger('scroll', {dir: 'down'});
       });
 
+      Mousetrap.bind(['n'], function(){
+        AudicaMPD.nextSong();
+      });
+
+      Mousetrap.bind(['p'], function(){
+        AudicaMPD.prevSong();
+      });
+
     };
 
     bindKeysToView.search = function(){

@@ -2,11 +2,11 @@
   "use strict";
 
   function PlayerView(){
-    var self = this,
-      scrollPositions = [],
+    var scrollPosition = 0,
       scrollStep = 0,
-      maxScrollsteps = 0,
-      ring = $('<div id="ring"></div>');
+      playlistLength = 0,
+      trackInFront = 1,
+      halfWindow = $(window).height() / 2;
 
     var updateView = function(args){
       var currentTrack = args.track;
@@ -37,18 +37,17 @@
     var renderTracklist = function(list){
       var length = list.length;
       var angle = 360 / length;
-      var radius = 200;
-      maxScrollsteps = length - 1;
+      //110 = single track div height
+      var radius = ((110 / Math.PI) * length) / 2;
+      playlistLength = length;
+      scrollStep = angle;
       for (var i = 0; i < length; i++) {
         var track = list[i].track;
-        scrollPositions.push(angle * i);
-        var trackDiv = $('<div style="-webkit-transform:rotateX(' + (angle * i) + 'deg) translateZ(' + radius + 'px);"><p>' + track.name+ '</p></div>');
-        trackDiv.appendTo(ring);
+        var trackDiv = $('<div><p>' + track.name+ '</p><p>by: '+ track.artists[0].name +'</p><p>from: '+ track.album.name +'</p></div>');
+        trackDiv.css({'-webkit-transform':'rotateX(' + (angle * i) + 'deg) translateZ(' + radius + 'px)'});
+        trackDiv.height(80);
+        trackDiv.appendTo(AudicaMPD.Dom.ring);
       }
-      ring.appendTo(AudicaMPD.Dom.trackList);
-      var halfWindow = $(window).height() / 2;
-      ring.height(halfWindow);
-      ring.css({'top':halfWindow / 2});
     };
 
     var getTracklist = function(){
@@ -57,14 +56,22 @@
     };
 
     var scrollTracklist = function(args){
-      args.dir === 'up' ? scrollStep++ : scrollStep--;
-      if(scrollStep > maxScrollsteps){
-        scrollStep = 0;
-      }else if( scrollStep < 0){
-        scrollStep = maxScrollsteps;
+      if(args.dir === 'up'){
+        scrollPosition = scrollPosition + scrollStep;
+        trackInFront++;
+      } else{
+        scrollPosition = scrollPosition - scrollStep;
+        trackInFront--;
       }
-      var scrollPosition = scrollPositions[scrollStep];
-      ring.css({'-webkit-transform': 'rotateX('+ scrollPosition +'deg) translateY(140px)'});
+
+      if(trackInFront <= 0){
+        trackInFront = playlistLength - 1;
+      }else if(trackInFront >= playlistLength -1){
+        trackInFront = 1;
+      }
+      console.log(trackInFront);
+      //TODO wo kommt der offset von 40px her
+      AudicaMPD.Dom.ring.css({'-webkit-transform': 'rotateX('+ scrollPosition +'deg) translateY('+ (halfWindow - 40)+'px)'});
     };
 
     var bindEvents = function(){

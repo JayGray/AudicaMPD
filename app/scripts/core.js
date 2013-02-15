@@ -38,10 +38,7 @@
     timeline: null,
     playerView: null,
     trackList: null,
-    currentPlaying: null,
-    track: null,
-    artist: null,
-    album: null,
+    ring: null,
     searchField: null,
     searchResults: null
   };
@@ -63,6 +60,10 @@
     this.Dom.searchResults.height(windowHeight - 50);
     this.Dom.trackList.height(windowHeight - 50);
     this.Dom.playerView.height(windowHeight);
+    this.Dom.ring.css({
+      '-webkit-transform': 'rotateX(0deg) translateY('+ ((windowHeight / 2) - 40) +'px)',
+      'height': windowHeight
+    });
   };
 
   AudicaMPD.prototype.initWebsocket = function(){
@@ -198,6 +199,22 @@
       .then(self.mopidy.tracklist.add, console.error)
       .then(getFirst, console.error)
       .then(self.mopidy.playback.play, console.error);
+  };
+
+  AudicaMPD.prototype.nextSong = function(){
+    var self = this;
+    this.mopidy.playback.next()
+      .then(function(a,b,c,d){
+        console.log(a,b,c,d)
+      })
+  };
+
+  AudicaMPD.prototype.prevSong = function(){
+    var self = this;
+    this.mopidy.playback.previous()
+      .then(function(a,b,c,d){
+        console.log(a,b,c,d)
+      })
   };
 //End playback
 
