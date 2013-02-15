@@ -2,7 +2,11 @@
   "use strict";
 
   function PlayerView(){
-    var self = this;
+    var self = this,
+      scrollPositions = [],
+      scrollStep = 0,
+      maxScrollsteps = 0,
+      ring = $('<div id="ring"></div>');
 
     var updateView = function(args){
       var currentTrack = args.track;
@@ -31,14 +35,20 @@
     };
 
     var renderTracklist = function(list){
-      var ul = $('<ul></ul>');
-      for (var i = 0, length = list.length; i < length; i++) {
+      var length = list.length;
+      var angle = 360 / length;
+      var radius = 200;
+      maxScrollsteps = length - 1;
+      for (var i = 0; i < length; i++) {
         var track = list[i].track;
-        console.log(track);
-        var li = $('<li>' + track.name+ '</li>');
-        li.appendTo(ul);
+        scrollPositions.push(angle * i);
+        var trackDiv = $('<div style="-webkit-transform:rotateX(' + (angle * i) + 'deg) translateZ(' + radius + 'px);"><p>' + track.name+ '</p></div>');
+        trackDiv.appendTo(ring);
       }
-      ul.appendTo(AudicaMPD.Dom.trackList);
+      ring.appendTo(AudicaMPD.Dom.trackList);
+      var halfWindow = $(window).height() / 2;
+      ring.height(halfWindow);
+      ring.css({'top':halfWindow / 2});
     };
 
     var getTracklist = function(){
@@ -46,10 +56,21 @@
         .then(renderTracklist, console.error);
     };
 
+    var scrollTracklist = function(args){
+      args.dir === 'up' ? scrollStep++ : scrollStep--;
+      if(scrollStep > maxScrollsteps){
+        scrollStep = 0;
+      }else if( scrollStep < 0){
+        scrollStep = maxScrollsteps;
+      }
+      var scrollPosition = scrollPositions[scrollStep];
+      ring.css({'-webkit-transform': 'rotateX('+ scrollPosition +'deg) translateY(140px)'});
+    };
 
     var bindEvents = function(){
 
       AudicaMPD.on('updateView', updateView);
+      AudicaMPD.on('scroll', scrollTracklist);
 
       AudicaMPD.on('websocketReady', function(){
         AudicaMPD.mopidy.on('event:trackPlaybackStarted', renderCurrentTrack);

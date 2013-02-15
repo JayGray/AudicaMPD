@@ -32,6 +32,14 @@
           .then(togglePlay, console.error);
       });
 
+      Mousetrap.bind(['up'], function(){
+        AudicaMPD.trigger('scroll', {dir: 'up'});
+      });
+
+      Mousetrap.bind(['down'], function(){
+        AudicaMPD.trigger('scroll', {dir: 'down'});
+      });
+
     };
 
     bindKeysToView.search = function(){

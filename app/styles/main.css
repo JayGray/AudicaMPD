@@ -133,11 +133,23 @@ body {
   box-shadow: 0 0 10px 5px #999;
 }
 #playerView #trackList {
-  width: 45%;
-  float: left;
-  overflow: auto;
+  width: 100%;
+  overflow: hidden;
 }
-#playerView #currentPlaying {
-  width: 45%;
-  float: right;
+#playerView #trackList #ring {
+  height: 110px;
+  width: 600px;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform: rotateX(0deg) translateY(140px);
+  -webkit-transition: all ease 700ms;
+}
+#playerView #trackList #ring div {
+  position: absolute;
+  left: 10px;
+  height: 22px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  font-size: 20px;
 }
