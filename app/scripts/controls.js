@@ -34,8 +34,14 @@
     var bindEvents = function(){
       AudicaMPD.on('websocketReady', function(){
         AudicaMPD.mopidy.on('event:trackPlaybackStarted', startBackgroundTasks);
+        AudicaMPD.mopidy.on('event:trackPlaybackResumed', startBackgroundTasks);
         AudicaMPD.mopidy.on('event:trackPlaybackEnded', stopBackgroundTasks);
-        AudicaMPD.on('playing', getCurrentTrack);
+        AudicaMPD.mopidy.on('event:trackPlaybackPaused', stopBackgroundTasks);
+        AudicaMPD.currentPlaybackStatus().then(function(state){
+          if('playing' === state){
+            getCurrentTrack();
+          }
+        });
       });
     };
 

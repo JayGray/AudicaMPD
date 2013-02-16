@@ -27,6 +27,10 @@
 .default-color #controls .icons div.prev:after {
   border-right-color: #316072;
 }
+.default-color #playerView #trackList #ring div.activeTrack {
+  background: #8a9ba6;
+  color: #f2f2f2;
+}
 body {
   overflow: hidden;
 }

@@ -13,6 +13,7 @@
     });
 
     bindKeysToView.player = function(){
+      globalKeys();
 
       Mousetrap.bind(['l'], function () {
         AudicaMPD.Dom.playerView.css('left', '100%');
@@ -51,6 +52,8 @@
     };
 
     bindKeysToView.search = function(){
+      globalKeys();
+
       Mousetrap.bind(['enter'], function () {
         if (searchField.is(':focus')) {
           var split = searchField.val().split(':');
@@ -108,19 +111,22 @@
     };
 
 
+    var globalKeys = function(){
+      Mousetrap.bind(['c'], function () {
+        var controls = AudicaMPD.Dom.controls;
+        var open = controls.data('open');
+        if(open){
+          controls.animate({'bottom': -46}, function(){
+            $(this).data('open', false);
+          });
+        }else{
+          controls.animate({'bottom': 0}, function(){
+            $(this).data('open', true);
+          });
+        }
+      });
+    };
 
-    Mousetrap.bind(['c'], function () {
-      var open = self.Dom.controls.data('open');
-      if(open){
-        self.Dom.controls.animate({'bottom': -46}, function(){
-          $(this).data('open', false);
-        });
-      }else{
-        self.Dom.controls.animate({'bottom': 0}, function(){
-          $(this).data('open', true);
-        });
-      }
-    });
 
     bindKeysToView[AudicaMPD.getViewState()].call(AudicaMPD);
   };

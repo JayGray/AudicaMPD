@@ -85,7 +85,9 @@
         console.log('websocketReady');
       });
 
-      self.mopidy.on('event:playbackStateChanged', self.stateChanged);
+      self.mopidy.on('event:playbackStateChanged', function(obj){
+        self.trigger('playbackStateChanged', obj);
+      });
 //      self.mopidy.on('event:trackPlaybackStarted', self.updatePlayerView);
     });
 
@@ -218,10 +220,6 @@
   };
 //End playback
 
-  AudicaMPD.prototype.stateChanged = function(event){
-    console.log(event);
-  };
-
   AudicaMPD.prototype.extend = function(name, fn){
     this.plugins[name] = fn;
   };
@@ -248,6 +246,10 @@
   };
 
 //End view
+
+  AudicaMPD.prototype.currentPlaybackStatus = function(){
+    return this.mopidy.playback.getState();
+  };
 
   AudicaMPD.prototype.start = function(){
     this.bindEvents();
